@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/static/css/main.ba5feda7.css",
-    "main.js": "/static/js/main.8c7dc082.js",
-    "static/js/239.baf2b8bd.chunk.js": "/static/js/239.baf2b8bd.chunk.js",
-    "static/js/977.030c87e8.chunk.js": "/static/js/977.030c87e8.chunk.js",
-    "static/js/455.a6266a08.chunk.js": "/static/js/455.a6266a08.chunk.js",
-    "static/js/453.c093c905.chunk.js": "/static/js/453.c093c905.chunk.js",
+    "main.js": "/static/js/main.b6f14fc8.js",
+    "static/js/239.d00ffe14.chunk.js": "/static/js/239.d00ffe14.chunk.js",
+    "static/js/977.2c8398bc.chunk.js": "/static/js/977.2c8398bc.chunk.js",
+    "static/js/455.f1fb2ab9.chunk.js": "/static/js/455.f1fb2ab9.chunk.js",
+    "static/js/453.75b2fc29.chunk.js": "/static/js/453.75b2fc29.chunk.js",
     "static/media/Camisa1.png": "/static/media/Camisa1.ca1e715a87d68d415041.png",
     "static/media/Camisa3.png": "/static/media/Camisa3.88ac68377b2e90d413fa.png",
     "static/media/Camisa2.png": "/static/media/Camisa2.0d84c0e5c62067c193c6.png",
     "index.html": "/index.html",
     "main.ba5feda7.css.map": "/static/css/main.ba5feda7.css.map",
-    "main.8c7dc082.js.map": "/static/js/main.8c7dc082.js.map",
-    "239.baf2b8bd.chunk.js.map": "/static/js/239.baf2b8bd.chunk.js.map",
-    "977.030c87e8.chunk.js.map": "/static/js/977.030c87e8.chunk.js.map",
-    "455.a6266a08.chunk.js.map": "/static/js/455.a6266a08.chunk.js.map",
-    "453.c093c905.chunk.js.map": "/static/js/453.c093c905.chunk.js.map"
+    "main.b6f14fc8.js.map": "/static/js/main.b6f14fc8.js.map",
+    "239.d00ffe14.chunk.js.map": "/static/js/239.d00ffe14.chunk.js.map",
+    "977.2c8398bc.chunk.js.map": "/static/js/977.2c8398bc.chunk.js.map",
+    "455.f1fb2ab9.chunk.js.map": "/static/js/455.f1fb2ab9.chunk.js.map",
+    "453.75b2fc29.chunk.js.map": "/static/js/453.75b2fc29.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ba5feda7.css",
-    "static/js/main.8c7dc082.js"
+    "static/js/main.b6f14fc8.js"
   ]
 }
