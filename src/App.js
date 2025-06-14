@@ -7,7 +7,7 @@ import {
     signOut,
     onAuthStateChanged,
 } from "firebase/auth";
-import { FaUser, FaSignOutAlt, FaShoppingCart, FaFilePdf } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaShoppingCart, FaFilePdf, FaTrash } from "react-icons/fa";
 
 // Imagens
 import Camisa1 from "./assets/Camisa1.png";
@@ -50,19 +50,44 @@ export default function App() {
     const handleLogout = () => signOut(auth);
 
     const addToCart = (product) => {
-        const quantity = parseInt(quantities[product.id]) || 1;
-        setCart((prev) => [...prev, { ...product, quantity }]);
+        const quantity = Math.max(1, parseInt(quantities[product.id]) || 1);
+
+        setCart((prev) => {
+            const existingIndex = prev.findIndex((item) => item.id === product.id);
+            if (existingIndex >= 0) {
+                const updated = [...prev];
+                updated[existingIndex].quantity += quantity;
+                return updated;
+            } else {
+                return [...prev, { ...product, quantity }];
+            }
+        });
+
+        setQuantities((prev) => ({ ...prev, [product.id]: 1 }));
+    };
+
+    const removeFromCart = (productId) => {
+        setCart((prev) => prev.filter((item) => item.id !== productId));
+    };
+
+    const updateCartQuantity = (productId, newQuantity) => {
+        const quantity = Math.max(1, parseInt(newQuantity) || 1);
+        setCart((prev) =>
+            prev.map((item) =>
+                item.id === productId ? { ...item, quantity } : item
+            )
+        );
     };
 
     const generatePDF = () => {
         const doc = new jsPDF();
-        doc.text("Orcamento", 10, 10);
+        doc.text("Orçamento", 10, 10);
         let y = 20;
         cart.forEach((item) => {
             doc.text(
-                `${item.name} - ${item.quantity} x R$${item.price.toFixed(2)} = R$${(
-                    item.quantity * item.price
-                ).toFixed(2)}`,
+                `${item.name} - ${item.quantity} x R$${item.price.toFixed(
+                    2
+                )} = R$${(item.quantity * item.price).toFixed(2)}`,
                 10,
                 y
             );
@@ -116,7 +141,7 @@ export default function App() {
     return (
         <div
             style={{ backgroundColor: "white", minHeight: "100vh", color: "black", position: "relative" }}
-            className="p-6"
+            className="p-6 max-w-7xl mx-auto"
         >
             {/* Botão sair fixado no topo direito */}
             <button
@@ -153,7 +178,7 @@ export default function App() {
 
             <header className="text-center mb-10">
                 <h1 className="text-4xl font-extrabold tracking-widest uppercase">L◉tus Negra</h1>
-                <p className="text-gray-700 ">Camisas Oversized personalizadas</p>
+                <p className="text-gray-700">Camisas Oversized personalizadas</p>
             </header>
 
             <h2 className="text-2xl font-bold mb-8">Catálogo</h2>
@@ -164,7 +189,7 @@ export default function App() {
                     display: "flex",
                     justifyContent: "space-between",
                     gap: "20px",
-                    flexWrap: "nowrap",
+                    flexWrap: "wrap",
                 }}
             >
                 {products.map((product) => (
@@ -175,26 +200,27 @@ export default function App() {
                             padding: "12px",
                             borderRadius: "12px",
                             boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                            flex: "0 0 30%",
+                            flex: "1 1 30%",
+                            maxWidth: "300px",
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
+                            marginBottom: "20px",
                         }}
                     >
                         <img
                             src={product.image}
                             alt={product.name}
                             style={{
-                                width: "270px",
-                                height: "150px",
+                                width: "100%",
+                                height: "auto",
+                                maxHeight: "150px",
                                 objectFit: "cover",
                                 borderRadius: "8px",
                                 marginBottom: "12px",
                             }}
                         />
-                        <h3
-                            style={{ fontWeight: "600", fontSize: "1.1rem", marginBottom: "6px" }}
-                        >
+                        <h3 style={{ fontWeight: "600", fontSize: "1.1rem", marginBottom: "6px" }}>
                             {product.name}
                         </h3>
                         <p
@@ -212,7 +238,10 @@ export default function App() {
                             min="1"
                             value={quantities[product.id] || 1}
                             onChange={(e) =>
-                                setQuantities({ ...quantities, [product.id]: e.target.value })
+                                setQuantities({
+                                    ...quantities,
+                                    [product.id]: Math.max(1, parseInt(e.target.value) || 1),
+                                })
                             }
                             style={{
                                 width: "100%",
@@ -251,13 +280,52 @@ export default function App() {
                 {cart.length === 0 ? (
                     <p className="text-gray-500">Nenhum item adicionado.</p>
                 ) : (
-                    <ul className="list-disc ml-6 space-y-1">
-                        {cart.map((item, index) => (
-                            <li key={index}>
-                                {item.quantity}x {item.name} —{" "}
-                                <span className="text-green-600">
+                    <ul className="space-y-4">
+                        {cart.map((item) => (
+                            <li
+                                key={item.id}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    backgroundColor: "#f9fafb",
+                                    padding: "8px 12px",
+                                    borderRadius: "8px",
+                                }}
+                            >
+                                <div style={{ flex: 1 }}>
+                                    <strong>{item.name}</strong>
+                                </div>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={item.quantity}
+                                    onChange={(e) => updateCartQuantity(item.id, e.target.value)}
+                                    style={{
+                                        width: "60px",
+                                        marginRight: "12px",
+                                        padding: "4px",
+                                        borderRadius: "6px",
+                                        border: "1px solid #d1d5db",
+                                        textAlign: "center",
+                                    }}
+                                />
+                                <span style={{ color: "#16a34a", fontWeight: "600", minWidth: "80px" }}>
                                     R${(item.price * item.quantity).toFixed(2)}
                                 </span>
+                                <button
+                                    onClick={() => removeFromCart(item.id)}
+                                    style={{
+                                        backgroundColor: "transparent",
+                                        border: "none",
+                                        color: "red",
+                                        cursor: "pointer",
+                                        marginLeft: "12px",
+                                    }}
+                                    title="Remover item"
+                                >
+                                    <FaTrash />
+                                </button>
                             </li>
                         ))}
                     </ul>
