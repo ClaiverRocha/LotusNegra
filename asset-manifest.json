@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/orcamento-produtos/static/css/main.ba5feda7.css",
+    "main.js": "/orcamento-produtos/static/js/main.461d019e.js",
+    "static/js/239.baf2b8bd.chunk.js": "/orcamento-produtos/static/js/239.baf2b8bd.chunk.js",
+    "static/js/977.030c87e8.chunk.js": "/orcamento-produtos/static/js/977.030c87e8.chunk.js",
+    "static/js/455.a6266a08.chunk.js": "/orcamento-produtos/static/js/455.a6266a08.chunk.js",
+    "static/js/453.c093c905.chunk.js": "/orcamento-produtos/static/js/453.c093c905.chunk.js",
+    "static/media/Camisa1.png": "/orcamento-produtos/static/media/Camisa1.ca1e715a87d68d415041.png",
+    "static/media/Camisa3.png": "/orcamento-produtos/static/media/Camisa3.88ac68377b2e90d413fa.png",
+    "static/media/Camisa2.png": "/orcamento-produtos/static/media/Camisa2.0d84c0e5c62067c193c6.png",
+    "index.html": "/orcamento-produtos/index.html",
+    "main.ba5feda7.css.map": "/orcamento-produtos/static/css/main.ba5feda7.css.map",
+    "main.461d019e.js.map": "/orcamento-produtos/static/js/main.461d019e.js.map",
+    "239.baf2b8bd.chunk.js.map": "/orcamento-produtos/static/js/239.baf2b8bd.chunk.js.map",
+    "977.030c87e8.chunk.js.map": "/orcamento-produtos/static/js/977.030c87e8.chunk.js.map",
+    "455.a6266a08.chunk.js.map": "/orcamento-produtos/static/js/455.a6266a08.chunk.js.map",
+    "453.c093c905.chunk.js.map": "/orcamento-produtos/static/js/453.c093c905.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba5feda7.css",
+    "static/js/main.461d019e.js"
+  ]
+}
