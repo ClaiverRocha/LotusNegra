@@ -1,6 +1,5 @@
 {
   "name": "lotus-negra",
-  "homepage": "https://claiverrocha.github.io/lotus-negra",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
