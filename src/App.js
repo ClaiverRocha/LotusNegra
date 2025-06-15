@@ -100,60 +100,57 @@ export default function App() {
 
     if (!user) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-100">
-                <div className="flex w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden">
-                    {/* Lado esquerdo - Login */}
-                    <div className="w-full md:w-1/2 p-10 flex flex-col justify-center bg-white">
-                        <h2 className="text-4xl font-bold text-gray-800 mb-4">Welcome Back!</h2>
-                        <p className="text-sm text-gray-500 mb-8">
-                            Por favor, entre com seus dados ou crie uma conta.
+            <div className="min-h-screen flex">
+                {/* Lado Esquerdo – formulário */}
+                <div className="w-full md:w-1/2 flex flex-col justify-center items-start p-12 bg-white">
+                    <h2 className="text-4xl font-bold text-gray-800 mb-4">Login</h2>
+                    <p className="text-gray-500 mb-8">Entre com seus dados para continuar</p>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Senha"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        className="w-full mb-6 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                    <button
+                        onClick={handleAuth}
+                        className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+                    >
+                        {isRegistering ? "Cadastrar" : "Entrar"}
+                    </button>
+                    <button
+                        onClick={() => setIsRegistering(!isRegistering)}
+                        className="mt-4 text-purple-600 hover:underline text-sm"
+                    >
+                        {isRegistering ? "Já tem conta? Faça login" : "Não tem conta? Cadastre-se"}
+                    </button>
+                </div>
+
+                {/* Lado Direito – fundo roxo + círculos decorativos */}
+                <div className="hidden md:block w-1/2 relative bg-gradient-to-br from-purple-500 to-purple-700">
+                    <div className="absolute top-10 left-10 w-24 h-24 bg-purple-300 rounded-full opacity-70"></div>
+                    <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-400 rounded-full opacity-60"></div>
+                    <div className="absolute top-40 right-1/4 w-32 h-32 bg-purple-200 rounded-full opacity-50"></div>
+
+                    {/* Texto ou ilustração no centro */}
+                    <div className="h-full flex flex-col justify-center items-center text-white px-8">
+                        <h3 className="text-3xl font-bold mb-4">Lotus Negra</h3>
+                        <p className="text-center">
+                            Camisas personalizadas com estilo.<br />
+                            Entre e confira!
                         </p>
-
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        />
-
-                        <input
-                            type="password"
-                            placeholder="Senha"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-3 mb-6 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        />
-
-                        <button
-                            onClick={handleAuth}
-                            className="w-full bg-purple-600 text-white font-semibold py-3 rounded-md hover:bg-purple-700 transition"
-                        >
-                            {isRegistering ? "Cadastrar" : "Entrar"}
-                        </button>
-
-                        <button
-                            onClick={() => setIsRegistering(!isRegistering)}
-                            className="mt-4 text-purple-600 text-sm hover:underline"
-                        >
-                            {isRegistering ? "Já tem uma conta? Faça login" : "Não tem conta? Cadastre-se"}
-                        </button>
-                    </div>
-
-                    {/* Lado direito - visualização roxa */}
-                    <div className="hidden md:flex w-1/2 items-center justify-center bg-gradient-to-br from-purple-400 to-purple-600">
-                        <div className="text-white px-10 text-center">
-                            <h3 className="text-3xl font-bold mb-4">Lotus Negra</h3>
-                            <p className="text-md">
-                                Camisas personalizadas com estilo e atitude.<br />Comece agora mesmo.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
         );
     }
-
 
     return (
         <div
