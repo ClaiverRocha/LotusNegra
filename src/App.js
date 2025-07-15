@@ -7,18 +7,42 @@ import {
     signOut,
     onAuthStateChanged,
 } from "firebase/auth";
-import { FaUser, FaSignOutAlt, FaShoppingCart, FaFilePdf, FaTrash } from "react-icons/fa";
+import {
+    FaUser,
+    FaSignOutAlt,
+    FaShoppingCart,
+    FaFilePdf,
+    FaTrash,
+    FaLock,
+    FaInstagram,
+    FaWhatsapp,
+} from "react-icons/fa";
 
-// Imagens
-import Camisa1 from "./assets/Camisa1.png";
-import Camisa2 from "./assets/Camisa2.png";
-import Camisa3 from "./assets/Camisa3.png";
+// Tenta carregar imagens dinamicamente
+const loadImage = (index) => {
+  try {
+    return require(`./assets/Camisa${index}.png`);
+  } catch (error) {
+    return "https://via.placeholder.com/300x150?text=Produto+em+breve";
+  }
+};
 
-const products = [
-    { id: 1, name: "Modelo 1", price: 69.99, image: Camisa1 },
-    { id: 2, name: "Modelo 2", price: 69.99, image: Camisa2 },
-    { id: 3, name: "Modelo 3", price: 69.99, image: Camisa3 },
-];
+const products = Array.from({ length: 12 }, (_, i) => {
+    const index = i + 1;
+    const image = loadImage(index);
+    const nomesOficiais = ["Fake Queen", "Coelho", "Lotus Negra"];
+
+    const isPlaceholder = typeof image === "string" && image.includes("placeholder");
+
+    return {
+        id: index,
+        name: isPlaceholder ? "Produto em breve" : nomesOficiais[i] || `Camisa ${index}`,
+        price: isPlaceholder ? 0 : 99.99,
+        image,
+        available: !isPlaceholder,
+    };
+});
+
 
 export default function App() {
     const [cart, setCart] = useState([]);
@@ -93,60 +117,90 @@ export default function App() {
             );
             y += 10;
         });
-        const total = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+        const total = cart.reduce(
+            (sum, item) => sum + item.quantity * item.price,
+            0
+        );
         doc.text(`Total: R$${total.toFixed(2)}`, 10, y);
         doc.save("orcamento.pdf");
     };
 
     if (!user) {
         return (
-            <div className="min-h-screen flex">
-                {/* Lado Esquerdo – formulário */}
-                <div className="w-full md:w-1/2 flex flex-col justify-center items-start p-12 bg-white">
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">Login</h2>
-                    <p className="text-gray-500 mb-8">Entre com seus dados para continuar</p>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        className="w-full mb-6 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    />
+            <div className="login-container">
+                {/* Lado esquerdo */}
+                <div className="login-left">
+                    <h1 className="font-lobster">L◉tus Negra</h1>
+                    <p>
+                        Faça seu orçamento de camisetas oversized personalizadas
+                        com estilo e qualidade!
+                    </p>
+                    <div className="social-icons">
+                        <a
+                            href="https://www.instagram.com/l0tusnegra"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"
+                        >
+                            <FaInstagram size={28} />
+                        </a>
+                        <a
+                            href="https://wa.me/5574999751663"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp"
+                        >
+                            <FaWhatsapp size={28} />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Lado direito */}
+                <div className="login-right">
+                    <h2>Login</h2>
+                    <p>Entre com seus dados para continuar</p>
+
+                    <div className="flex items-center w-full max-w-sm mb-4 border border-gray-700 rounded-lg bg-[#222] focus-within:ring-2 focus-within:ring-purple-600">
+                        <div className="px-3 text-gray-400">
+                            <FaUser />
+                        </div>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full bg-transparent p-3 text-white placeholder-gray-500 focus:outline-none rounded-r-lg"
+                        />
+                    </div>
+
+                    <div className="flex items-center w-full max-w-sm mb-6 border border-gray-700 rounded-lg bg-[#222] focus-within:ring-2 focus-within:ring-purple-600">
+                        <div className="px-3 text-gray-400">
+                            <FaLock />
+                        </div>
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full bg-transparent p-3 text-white placeholder-gray-500 focus:outline-none rounded-r-lg"
+                        />
+                    </div>
+
                     <button
                         onClick={handleAuth}
-                        className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+                        className="w-full max-w-sm bg-purple-700 hover:bg-purple-800 transition text-white py-3 rounded-lg font-semibold"
                     >
                         {isRegistering ? "Cadastrar" : "Entrar"}
                     </button>
+
                     <button
                         onClick={() => setIsRegistering(!isRegistering)}
-                        className="mt-4 text-purple-600 hover:underline text-sm"
+                        className="toggle-button"
                     >
-                        {isRegistering ? "Já tem conta? Faça login" : "Não tem conta? Cadastre-se"}
+                        {isRegistering
+                            ? "Já tem conta? Faça login"
+                            : "Não tem conta? Cadastre-se"}
                     </button>
-                </div>
-
-                {/* Lado Direito – fundo roxo + círculos decorativos */}
-                <div className="hidden md:block w-1/2 relative bg-gradient-to-br from-purple-500 to-purple-700">
-                    <div className="absolute top-10 left-10 w-24 h-24 bg-purple-300 rounded-full opacity-70"></div>
-                    <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-400 rounded-full opacity-60"></div>
-                    <div className="absolute top-40 right-1/4 w-32 h-32 bg-purple-200 rounded-full opacity-50"></div>
-
-                    {/* Texto ou ilustração no centro */}
-                    <div className="h-full flex flex-col justify-center items-center text-white px-8">
-                        <h3 className="text-3xl font-bold mb-4">Lotus Negra</h3>
-                        <p className="text-center">
-                            Camisas personalizadas com estilo.<br />
-                            Entre e confira!
-                        </p>
-                    </div>
                 </div>
             </div>
         );
@@ -154,7 +208,12 @@ export default function App() {
 
     return (
         <div
-            style={{ backgroundColor: "white", minHeight: "100vh", color: "black", position: "relative" }}
+            style={{
+                backgroundColor: "white",
+                minHeight: "100vh",
+                color: "black",
+                position: "relative",
+            }}
             className="p-6 max-w-7xl mx-auto"
         >
             {/* Botão sair fixado no topo direito */}
@@ -191,13 +250,17 @@ export default function App() {
             </button>
 
             <header className="text-center mb-10">
-                <h1 className="text-4xl font-extrabold tracking-widest uppercase">L◉tus Negra</h1>
-                <p className="text-gray-700">Camisas Oversized personalizadas</p>
+                <h1 className="text-4xl font-extrabold tracking-widest uppercase">
+                    L◉tus Negra
+                </h1>
+                <p className="text-gray-700">
+                    Camisas Oversized personalizadas
+                </p>
             </header>
 
             <h2 className="text-2xl font-bold mb-8">Catálogo</h2>
 
-            {/* Linha com 3 produtos lado a lado */}
+            {/* Linha de produtos */}
             <div
                 style={{
                     display: "flex",
@@ -234,7 +297,13 @@ export default function App() {
                                 marginBottom: "12px",
                             }}
                         />
-                        <h3 style={{ fontWeight: "600", fontSize: "1.1rem", marginBottom: "6px" }}>
+                        <h3
+                            style={{
+                                fontWeight: "600",
+                                fontSize: "1.1rem",
+                                marginBottom: "6px",
+                            }}
+                        >
                             {product.name}
                         </h3>
                         <p
@@ -245,44 +314,55 @@ export default function App() {
                                 marginBottom: "8px",
                             }}
                         >
-                            R${product.price.toFixed(2)}
+                            {product.available
+                                ? `R$${product.price.toFixed(2)}`
+                                : "Em breve"}
                         </p>
-                        <input
-                            type="number"
-                            min="1"
-                            value={quantities[product.id] || 1}
-                            onChange={(e) =>
-                                setQuantities({
-                                    ...quantities,
-                                    [product.id]: Math.max(1, parseInt(e.target.value) || 1),
-                                })
-                            }
-                            style={{
-                                width: "100%",
-                                padding: "6px",
-                                fontSize: "0.8rem",
-                                border: "1px solid #d1d5db",
-                                borderRadius: "6px",
-                                marginBottom: "8px",
-                                textAlign: "center",
-                            }}
-                        />
-                        <button
-                            onClick={() => addToCart(product)}
-                            style={{
-                                width: "100%",
-                                backgroundColor: "#1E90FF",
-                                color: "black",
-                                padding: "8px",
-                                fontWeight: "700",
-                                borderRadius: "8px",
-                                fontSize: "0.9rem",
-                                cursor: "pointer",
-                                border: "none",
-                            }}
-                        >
-                            Adicionar
-                        </button>
+
+                        {product.available && (
+                            <>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={quantities[product.id] || 1}
+                                    onChange={(e) =>
+                                        setQuantities({
+                                            ...quantities,
+                                            [product.id]:
+                                                Math.max(
+                                                    1,
+                                                    parseInt(e.target.value) || 1
+                                                ),
+                                        })
+                                    }
+                                    style={{
+                                        width: "100%",
+                                        padding: "6px",
+                                        fontSize: "0.8rem",
+                                        border: "1px solid #d1d5db",
+                                        borderRadius: "6px",
+                                        marginBottom: "8px",
+                                        textAlign: "center",
+                                    }}
+                                />
+                                <button
+                                    onClick={() => addToCart(product)}
+                                    style={{
+                                        width: "100%",
+                                        backgroundColor: "#1E90FF",
+                                        color: "black",
+                                        padding: "8px",
+                                        fontWeight: "700",
+                                        borderRadius: "8px",
+                                        fontSize: "0.9rem",
+                                        cursor: "pointer",
+                                        border: "none",
+                                    }}
+                                >
+                                    Adicionar
+                                </button>
+                            </>
+                        )}
                     </div>
                 ))}
             </div>
@@ -314,7 +394,12 @@ export default function App() {
                                     type="number"
                                     min="1"
                                     value={item.quantity}
-                                    onChange={(e) => updateCartQuantity(item.id, e.target.value)}
+                                    onChange={(e) =>
+                                        updateCartQuantity(
+                                            item.id,
+                                            e.target.value
+                                        )
+                                    }
                                     style={{
                                         width: "60px",
                                         marginRight: "12px",
@@ -324,8 +409,15 @@ export default function App() {
                                         textAlign: "center",
                                     }}
                                 />
-                                <span style={{ color: "#16a34a", fontWeight: "600", minWidth: "80px" }}>
-                                    R${(item.price * item.quantity).toFixed(2)}
+                                <span
+                                    style={{
+                                        color: "#16a34a",
+                                        fontWeight: "600",
+                                        minWidth: "80px",
+                                    }}
+                                >
+                                    R$
+                                    {(item.price * item.quantity).toFixed(2)}
                                 </span>
                                 <button
                                     onClick={() => removeFromCart(item.id)}
