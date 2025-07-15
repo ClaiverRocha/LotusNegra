@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.6a191c69.css",
-    "main.js": "/static/js/main.e05162af.js",
-    "static/js/239.85f2e957.chunk.js": "/static/js/239.85f2e957.chunk.js",
-    "static/js/977.5d7a057d.chunk.js": "/static/js/977.5d7a057d.chunk.js",
-    "static/js/732.c739b1e0.chunk.js": "/static/js/732.c739b1e0.chunk.js",
-    "static/js/453.fbe6b97f.chunk.js": "/static/js/453.fbe6b97f.chunk.js",
-    "static/media/Camisa1.png": "/static/media/Camisa1.ca1e715a87d68d415041.png",
-    "static/media/Camisa3.png": "/static/media/Camisa3.88ac68377b2e90d413fa.png",
-    "static/media/Camisa2.png": "/static/media/Camisa2.0d84c0e5c62067c193c6.png",
-    "index.html": "/index.html",
-    "main.6a191c69.css.map": "/static/css/main.6a191c69.css.map",
-    "main.e05162af.js.map": "/static/js/main.e05162af.js.map",
-    "239.85f2e957.chunk.js.map": "/static/js/239.85f2e957.chunk.js.map",
-    "977.5d7a057d.chunk.js.map": "/static/js/977.5d7a057d.chunk.js.map",
-    "732.c739b1e0.chunk.js.map": "/static/js/732.c739b1e0.chunk.js.map",
-    "453.fbe6b97f.chunk.js.map": "/static/js/453.fbe6b97f.chunk.js.map"
+    "main.css": "/ClaiverRocha/LotusNegra/static/css/main.6a191c69.css",
+    "main.js": "/ClaiverRocha/LotusNegra/static/js/main.d3f22ad3.js",
+    "static/js/239.85f2e957.chunk.js": "/ClaiverRocha/LotusNegra/static/js/239.85f2e957.chunk.js",
+    "static/js/977.5d7a057d.chunk.js": "/ClaiverRocha/LotusNegra/static/js/977.5d7a057d.chunk.js",
+    "static/js/732.c739b1e0.chunk.js": "/ClaiverRocha/LotusNegra/static/js/732.c739b1e0.chunk.js",
+    "static/js/453.fbe6b97f.chunk.js": "/ClaiverRocha/LotusNegra/static/js/453.fbe6b97f.chunk.js",
+    "static/media/Camisa1.png": "/ClaiverRocha/LotusNegra/static/media/Camisa1.ca1e715a87d68d415041.png",
+    "static/media/Camisa3.png": "/ClaiverRocha/LotusNegra/static/media/Camisa3.88ac68377b2e90d413fa.png",
+    "static/media/Camisa2.png": "/ClaiverRocha/LotusNegra/static/media/Camisa2.0d84c0e5c62067c193c6.png",
+    "index.html": "/ClaiverRocha/LotusNegra/index.html",
+    "main.6a191c69.css.map": "/ClaiverRocha/LotusNegra/static/css/main.6a191c69.css.map",
+    "main.d3f22ad3.js.map": "/ClaiverRocha/LotusNegra/static/js/main.d3f22ad3.js.map",
+    "239.85f2e957.chunk.js.map": "/ClaiverRocha/LotusNegra/static/js/239.85f2e957.chunk.js.map",
+    "977.5d7a057d.chunk.js.map": "/ClaiverRocha/LotusNegra/static/js/977.5d7a057d.chunk.js.map",
+    "732.c739b1e0.chunk.js.map": "/ClaiverRocha/LotusNegra/static/js/732.c739b1e0.chunk.js.map",
+    "453.fbe6b97f.chunk.js.map": "/ClaiverRocha/LotusNegra/static/js/453.fbe6b97f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6a191c69.css",
-    "static/js/main.e05162af.js"
+    "static/js/main.d3f22ad3.js"
   ]
 }
